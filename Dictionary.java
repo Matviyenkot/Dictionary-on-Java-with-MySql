@@ -40,15 +40,21 @@ public class Dictionary {
         System.out.print(question);
         Scanner scanner = new Scanner(System.in);
 
-        String answer = scanner.nextLine();
+//        String answer = scanner.nextLine();
 
-        return answer;
+        return scanner.nextLine();
     }
 
     void putWordsInDictionary(Statement statement){
 
-        String wordOnUkrainian = askToInputString("Please enter word on Ukrainian: ");
-        String wordOnEnglish = askToInputString("Please enter word on English: ");
+        String wordOnUkrainian = askToInputString(
+                "Please enter word on Ukrainian or '0' to get back in main menu: ");
+        String wordOnEnglish = askToInputString(
+                "Please enter word on English or '0' to get back in main menu: ");
+
+        if(wordOnUkrainian.equals("0") || wordOnEnglish.equals("0")){
+            return;
+        }
 
         try {
             if(wordOnUkrainian.length()>1 && wordOnEnglish.length()>1){
@@ -88,9 +94,12 @@ public class Dictionary {
 
             if(delete == 2){
                 String strID = askToInputString(
-                        "Please put the id of word which you want to delete from Dictionary: ");
+                        "Please put the id of word which you want to delete from Dictionary or '0' to get back in main menu: ");
                 try{
                     int id = Integer.parseInt(strID);
+                    if(id == 0){
+                        return;
+                    }
                     statement.execute("delete from words2_0 where id =" + id);
                 }
                 catch (NumberFormatException e){
@@ -116,8 +125,13 @@ public class Dictionary {
 
         try{
             String idUpdate = askToInputString(
-                    "Please put the id of word which you want to update in Dictionary: ");
+                    "Please put the id of word which you want to update in Dictionary or '0' to get back in main menu: ");
             int id = Integer.parseInt(idUpdate);
+
+            //give an opportunity to cancel the action and get back in main menu
+            if(id == 0){
+                return;
+            }
 
             String wordOnUkrainian = askToInputString(
                     "Please enter word on Ukrainian which you want to update: ");
@@ -140,7 +154,7 @@ public class Dictionary {
                 System.out.println("English word " + wordOnEnglish + " was update in Dictionary");
                 System.out.println();
             } else{
-                System.out.println("Please enter the word!");
+                System.out.println("Please enter the words!");
             }
 
         }
