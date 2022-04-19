@@ -1,0 +1,52 @@
+package com.company.DictionaryOnDataBase;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class StartTheDictionary {
+    private static final String USER_NAME = "root";
+    private static final String PASSWORD = "root";
+    private static final String CONNECTION_URL = "jdbc:mysql://localhost:8889/Dictionary";
+
+
+    public static void main(String[] args){
+
+
+        try {
+            DBConnection dbConnection = new DBConnection();
+            Connection connection = dbConnection.getConnection(CONNECTION_URL, USER_NAME, PASSWORD);
+            Statement statement = connection.createStatement();
+
+            UInterface UI = new UInterface();
+            Dictionary dictionary = new Dictionary();
+
+            Boolean working  = true;
+
+            while(working){
+                UI.showActions();
+                switch (UI.getNumOfAction()){
+                    case 1: dictionary.putWordsInDictionary(statement);
+                        break;
+                    case 2: dictionary.deleteWordFromDictionary(statement, UI.getNumOfAction());
+                        break;
+                    case 3: dictionary.deleteWordFromDictionary(statement, UI.getNumOfAction());
+                        break;
+                    case 4: dictionary.updateWord(connection);
+                        break;
+                    case 5: dictionary.showDictionary(statement);
+                        break;
+                    case 0: working = false;
+                        break;
+                }
+            }
+
+            statement.close();
+            connection.close();
+        }
+        catch (SQLException sqle){
+            System.out.println("Something was wrong!");
+            System.out.println(sqle);
+        }
+    }
+}
