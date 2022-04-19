@@ -49,10 +49,15 @@ public class Dictionary {
 
         String wordOnUkrainian = askToInputString(
                 "Please enter word on Ukrainian or '0' to get back in main menu: ");
+        if(wordOnUkrainian.equals("0")){
+            System.out.println();
+            return;
+        }
         String wordOnEnglish = askToInputString(
                 "Please enter word on English or '0' to get back in main menu: ");
 
-        if(wordOnUkrainian.equals("0") || wordOnEnglish.equals("0")){
+        if( wordOnEnglish.equals("0")){
+            System.out.println();
             return;
         }
 
@@ -98,6 +103,7 @@ public class Dictionary {
                 try{
                     int id = Integer.parseInt(strID);
                     if(id == 0){
+                        System.out.println();
                         return;
                     }
                     statement.execute("delete from words2_0 where id =" + id);
@@ -130,13 +136,14 @@ public class Dictionary {
 
             //give an opportunity to cancel the action and get back in main menu
             if(id == 0){
+                System.out.println();
                 return;
             }
 
             String wordOnUkrainian = askToInputString(
-                    "Please enter word on Ukrainian which you want to update: ");
+                    "Please enter new word on Ukrainian which you want to update: ");
             String wordOnEnglish = askToInputString(
-                    "Please enter word on English which you want to update: ");
+                    "Please enter new word on English which you want to update: ");
 
             if(wordOnUkrainian.length()>1 && wordOnEnglish.length()>1){
 
