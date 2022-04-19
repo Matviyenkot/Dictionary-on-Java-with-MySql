@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+//database on mysql
+// name Dictionary table words2_0
+//fields: id(AI), Ukrainian(null), English(null)
+
 public class StartTheDictionary {
     private static final String USER_NAME = "root";
     private static final String PASSWORD = "root";
