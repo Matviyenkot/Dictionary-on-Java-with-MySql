@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DBConnection {
+public class DBConnection{
     private Connection connection;
 
     public Connection getConnection(String Url, String username, String password) throws SQLException {
@@ -15,4 +15,5 @@ public class DBConnection {
         connection = DriverManager.getConnection(Url,username, password);
         return connection;
     }
+
 }

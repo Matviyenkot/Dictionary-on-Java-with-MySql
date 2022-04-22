@@ -16,11 +16,10 @@ public class StartTheDictionary {
 
     public static void main(String[] args){
 
+        DBConnection dbConnection = new DBConnection();
 
-        try {
-            DBConnection dbConnection = new DBConnection();
-            Connection connection = dbConnection.getConnection(CONNECTION_URL, USER_NAME, PASSWORD);
-            Statement statement = connection.createStatement();
+        try (Connection connection = dbConnection.getConnection(CONNECTION_URL, USER_NAME, PASSWORD);
+             Statement statement = connection.createStatement()){
 
             UInterface UI = new UInterface();
             Dictionary dictionary = new Dictionary();
@@ -45,12 +44,12 @@ public class StartTheDictionary {
                 }
             }
 
-            statement.close();
-            connection.close();
         }
         catch (SQLException sqle){
             System.out.println("Something was wrong!");
             System.out.println(sqle);
         }
+
+
     }
 }
